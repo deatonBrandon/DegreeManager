@@ -23,12 +23,10 @@
 
 import pandas as pd
 
-FILENAME = "Activations.csv"
-
 # read values and separate rows in 'Major' that can be grouped based on similar values
-def clean_the_data():
+def clean_the_data(file):
 
-    degree = pd.read_csv(FILENAME, index_col=False) 
+    degree = pd.read_csv(file, index_col=False) 
 
     degree = degree.rename(columns = {'Activation Rate': 'Activation_Rate'})
 
@@ -60,28 +58,28 @@ def clean_the_data():
     degree['Major'] = name_col
     degree.insert(1, 'Types', type_col)
 
-
     new_df = degree.groupby('Major', as_index=False, group_keys=False, sort=False).agg({'Types': 'unique', 'Activated': 'mean', 'Unactivated': 'mean', 'Activation_Rate': 'mean'}).round(2)
     
-    # print(new_df)
     new_df.to_csv('Solution.csv', index=False)
 
 
 def main():
-    # print("Welcome to the csv reader!")
-    # while True:
-        # name = input("Please enter the file name only. There is no case sensitivity: ")
-        # file_name = name.lower() + ".csv"
-        # try:
-            clean_the_data()
-        #     print("Success!")
-        #     break
-        # except FileExistsError:
-        #     print("Error finding this file. Please check the spelling of this file.")
-        #     continue
-        # except FileNotFoundError:
-        #     print("File is not found. Please try again.")
-        #     continue
+    print("Welcome to the csv reader!")
+    while True:
+        name = input("Please enter the file name only. There is no case sensitivity: ")
+        file_name = name.lower() + ".csv"
+        try:
+            clean_the_data(file_name)
+            print("Success!")
+            break
+        except FileExistsError:
+            print("Error reading this specific file. Please try again.")
+            continue
+        except FileNotFoundError:
+            print("File is not found. Please try again.")
+            continue
+        except Exception:
+            print("Something went wrong. Please try again.")
 
 
 
