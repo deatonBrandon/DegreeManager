@@ -80,6 +80,7 @@ def main():
             continue
         except Exception:
             print("Something went wrong. Please try again.")
+            continue
 
 
 
