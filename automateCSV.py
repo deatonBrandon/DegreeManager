@@ -62,7 +62,6 @@ def clean_the_data(file):
     
     new_df.to_csv('Solution.csv', index=False)
 
-
 def main():
     print("Welcome to the csv reader!")
     while True:
@@ -80,8 +79,6 @@ def main():
             continue
         except Exception:
             print("Something went wrong. Please try again.")
-
-
 
 if __name__ == '__main__':
     main()
