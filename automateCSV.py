@@ -79,6 +79,7 @@ def main():
             continue
         except Exception:
             print("Something went wrong. Please try again.")
+            continue
 
 if __name__ == '__main__':
     main()
